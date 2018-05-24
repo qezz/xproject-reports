@@ -1,6 +1,10 @@
 # Reference
 
-## Reports ##
+## Cost and Usage Reports (CUR) (recomended) ##
+
+
+
+## Reports (are not recomended to use!) ##
 
 In this section the reports from settings page are described
 
