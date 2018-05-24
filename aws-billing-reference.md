@@ -2,6 +2,20 @@
 
 ## Reports ##
 
+In this section the reports from settings page are described
+
+<details><summary>Screenshots</summary>
+
+Billings -> Preferences -> `[ ]` Receive Billing Reports
+
+![SettingsPage](qezz.github.io/shared/aws-settings-reports.png)
+
+In some time you will see these reports at the provided s3 bucket
+
+![BucketRootPage](qezz.github.io/shared/aws-settings-reports-2.png)
+
+</details>
+
 ### Detailed Billing Report with Resources and Tags ###
 
 > **Important**
