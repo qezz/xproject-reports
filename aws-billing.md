@@ -37,9 +37,9 @@ Usualy, the report path will be:
 * `perfix` is the prefix path chosen at step 6
 * `reportname` is the report name chosen at the step 5
 * `randomdir` is usually smth like
-  `abcdefgh-abcd-acbd-acbd-abcdefghijkl` except that letters are
-  different
-* `timeinterval` for may, 2018 is `20180501-20180601`
+  `abcdefgh-igkl-mnop-qrst-uvwxyz123456` except that letters and
+  digits are different
+* `timeinterval` for may, 2018 it is `20180501-20180601`
 * `N` is usually "1" (guess it depends on anount of similar reports)
 
 To get the most recent report you should parse the
@@ -372,6 +372,14 @@ and get the `assemblyId` field
 ```
 
 </details>
+
+### How to get the most recent report file from S3 ###
+
+1. Setup the SDK ([guide](https://github.com/pavlov-tony/xproject/issues/3#issuecomment-388046256)).
+   Environment variables are preferable.
+2. Get the Manifest
+3. Get the report
+
 
 
 ## Costs for the whole month
