@@ -14,7 +14,7 @@ Example returns empty list for me:
 
 ```json
 {
-  ProvisionedProducts: []
+  "ProvisionedProducts": []
 }
 ```
 
