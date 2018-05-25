@@ -387,8 +387,9 @@ See example: [aws-get-s3-example.go]
 Usage `go run aws-get-s3-example.go report-name` 
 
 
+## Current costs
 
-## Costs for the whole month
+
 
 
 
