@@ -2,9 +2,9 @@
 
 ## Important note ##
 
-In this guide I will use Cost and Usage Reports service, because it is
-recomended by AWS, due to fact that standard reports are going to be
-deprecated and unavailable in future
+In this guide I will use **Cost and Usage Reports service**, because
+it is recomended by AWS, due to fact that standard reports are going
+to be deprecated and unavailable in future
 
 ## Using Cost and Usage Reports (CUR) ##
 
