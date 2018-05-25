@@ -381,15 +381,17 @@ and get the `assemblyId` field
    Environment variables are preferable.
 2. Get the Manifest
 3. Get the report
+4. Unzip it
 
 See example: [aws-get-s3-example.go]
 
 Usage `go run aws-get-s3-example.go report-name` 
 
+### Un-gzip
+
+See [aws-extract-gz-file-example.go](aws-extract-gz-file-example.go) example
 
 ## Current costs
-
-
 
 
 
