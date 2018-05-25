@@ -400,3 +400,18 @@ Just iterate over all rows in csv, and sum the value under "lineItem/UnblendedCo
 See [aws-current-cost-example.go](aws-current-cost-example.go) example
 
 Usage `go run aws-current-cost-example.go`
+
+## Simple costs to the end of the month ##
+
+(Not implemented, yet)
+
+Algorithm: 
+
+1. Get the current costs
+2. Find the average costs per day - `avg = current_costs / current_day_of_month`
+3. Multiply the avg by the number of the days in the current month - `avg * days_in_month`
+
+## Simple trend ##
+
+
+
