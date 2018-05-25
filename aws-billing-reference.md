@@ -1,6 +1,6 @@
 # Reference
 
-## Cost and Usage Reports (CUR) (recomended) ##
+## [ok] Cost and Usage Reports (CUR) (recomended) ##
 
 See [aws-billing.md](aws-billing.md)
 
