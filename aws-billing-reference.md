@@ -10,6 +10,14 @@ Well... It looks like the feature for organizations only
 
 See example: [aws-scan-provision-example.go](aws-scan-provision-example.go)
 
+Example returns empty list for me:
+
+```json
+{
+  ProvisionedProducts: []
+}
+```
+
 From the landing page: (https://aws.amazon.com/servicecatalog/)
 
 AWS Service Catalog allows **organizations** to create and manage
