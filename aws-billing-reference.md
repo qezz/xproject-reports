@@ -1,10 +1,10 @@
 # Reference
 
-## [ok] Cost and Usage Reports (CUR) (recomended) ##
+## [recomended by aws] Cost and Usage Reports (CUR) ##
 
 See [aws-billing.md](aws-billing.md)
 
-## AWS Service Catalog (Scan Provision)
+## [can't try] AWS Service Catalog (Scan Provision)
 
 Well... It looks like this feature is for organizations only (see description below)
 
@@ -34,7 +34,7 @@ to quickly deploy only the approved IT services they need.
 * Doc / Service Catalog: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
 
 
-## Reports (are not recomended to use!) ##
+## [would be deprecated in future] Old Reports (are not recomended to use!) ##
 
 In this section the reports from settings page are described
 
