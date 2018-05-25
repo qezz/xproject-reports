@@ -391,8 +391,12 @@ Usage `go run aws-get-s3-example.go report-name`
 
 See [aws-extract-gz-file-example.go](aws-extract-gz-file-example.go) example
 
+Usage `go run aws-extract-gz-file-example.go file.gz`
+
 ## Current costs
 
+Just iterate over all rows in csv, and sum the value under "lineItem/UnblendedCost"
 
+See [aws-current-cost-example.go](aws-current-cost-example.go) example
 
-
+Usage `go run aws-current-cost-example.go`

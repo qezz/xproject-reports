@@ -10,9 +10,11 @@ import (
 )
 
 func main() {
-	//	var buf bytes.Buffer
+	if len(os.Args) < 2 {
+		log.Fatalln("Usage: go run aws-extract-gz-file-example.go file.gz")
+	}
 
-	f, err := os.Open("zxc.csv.gz")
+	f, err := os.Open(os.Args[1])
 	if err != nil {
 		log.Fatal(err)
 	}
