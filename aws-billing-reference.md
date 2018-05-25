@@ -6,7 +6,7 @@ See [aws-billing.md](aws-billing.md)
 
 ## AWS Service Catalog (Scan Provision)
 
-Well... It looks like the feature for organizations only
+Well... It looks like this feature is for organizations only (see description below)
 
 See example: [aws-scan-provision-example.go](aws-scan-provision-example.go)
 
