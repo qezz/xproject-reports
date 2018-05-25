@@ -417,6 +417,25 @@ Algorithm:
 
 Algorithm:
 
-1. Build the trend for the derivative function - linear trend for per day cost
+1. Build the trend for the derivative function - linear trend for per
+   day cost - we can think about them like 1st order finite differences
 2. Sum it 
 
+Imagine this is the per-day-cost plot:
+
+![FirstOrderDiff](https://qezz.github.io/shared/finitediff.png)
+
+(Source: [Wikipedia](https://en.wikipedia.org/wiki/Finite_difference_method))
+
+The **sum** it the cost to the end of the month
+
+It can be approximated with number of functions, suggestions:
+
+* Linear (ax + b) it's OK, but...
+* Sine and Cosine functions combination - guessing that service load
+  is distibuted by weeks (low usage at the workdays and high at the weekends)
+* The same effect can be achieved simply duplicating the previous week
+  distribution
+* Your favourite function, because I'm not so cool at math
+
+Another approach is to fit the usage graph to any (probability) distribution
