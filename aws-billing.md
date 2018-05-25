@@ -413,5 +413,10 @@ Algorithm:
 
 ## Simple trend ##
 
+(Not implemented, yet)
 
+Algorithm:
+
+1. Build the trend for the derivative function - linear trend for per day cost
+2. Sum it 
 
