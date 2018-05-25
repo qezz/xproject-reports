@@ -6,7 +6,7 @@ import (
 	"fmt"
 	// "io"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	// "github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
@@ -22,34 +22,39 @@ func exitErrorf(msg string, args ...interface{}) {
 }
 
 func main() {
+	if len(os.Args) < 2 {
+		log.Println("Usage: go run aws-get-s3-example.go report-name")
+		return
+	}
+	reportname := os.Args[1]
+
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		log.Fatalln("unable to load SDK config:", err)
 	}
 
-	cfg.Region = endpoints.UsEast1RegionID
+	// Get report s3 path
+	// Report name is unique so we can use it as the only parameter
+	report, err := report.FindReport(&cfg, reportname)
 
-	s3path, err := report.FindReport(&cfg, "test-quicksight")
+	fmt.Println("S3 report path:", report.ReportPath)
 
-	fmt.Println("file s3 path:", s3path)
-	return
-	// svc := s3.New(cfg)
 	downloader := s3manager.NewDownloader(cfg)
 
 	filename := "test-output"
 	f, err := os.Create(filename)
 	if err != nil {
-		fmt.Errorf("failed to create file %q, %v", filename, err)
+		log.Printf("failed to create file %q, %v", filename, err)
 		return
 	}
 
 	n, err := downloader.Download(f, &s3.GetObjectInput{
-		Bucket: aws.String("qezz-xproject-test-bucket-91739124"),
-		Key:    aws.String(s3path),
+		Bucket: aws.String(*report.Def.S3Bucket),
+		Key:    aws.String(report.ReportPath),
 	})
 
 	if err != nil {
-		fmt.Errorf("failed to download file, %v", err)
+		log.Printf("failed to download file, %v", err)
 		return
 	}
 

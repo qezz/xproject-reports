@@ -19,7 +19,9 @@ Go to
 3. "Reports" in a side bar
 4. Enable Cost and Usage Reports if needed
 5. Create report
-   * Choose report name (will be referred to as `reportname`)
+   * Choose report name (from aws: "Report name must be unique ...",
+     possibly unique for account) (will be referred to as
+     `reportname`)
    * Select preferable time unit
    * Set checkmark against "include resource IDs"
    * Go "Next"
@@ -40,7 +42,7 @@ Usualy, the report path will be:
   `abcdefgh-igkl-mnop-qrst-uvwxyz123456` except that letters and
   digits are different
 * `timeinterval` for may, 2018 it is `20180501-20180601`
-* `N` is usually "1" (guess it depends on anount of similar reports)
+* `N` is usually "1" (I don't know can it even be not 1)
 
 To get the most recent report you should parse the
 `bucket/prefix/reportname/timeinterval/reportname-Manifest.json` file
@@ -379,6 +381,10 @@ and get the `assemblyId` field
    Environment variables are preferable.
 2. Get the Manifest
 3. Get the report
+
+See example: [aws-get-s3-example.go]
+
+Usage `go run aws-get-s3-example.go report-name` 
 
 
 

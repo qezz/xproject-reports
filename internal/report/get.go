@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/qezz/xproject-reports/internal/models"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	cur "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
@@ -31,7 +33,7 @@ func NewFindReportError(err *error, reportname string) FindReportError {
 	}
 }
 
-func FindReport(cfg *aws.Config, reportname string) (string, error) {
+func FindReport(cfg *aws.Config, reportname string) (models.CurInfo, error) {
 	cfg.Region = endpoints.UsEast1RegionID
 
 	curclient := cur.New(*cfg)
@@ -40,30 +42,36 @@ func FindReport(cfg *aws.Config, reportname string) (string, error) {
 	req := curclient.DescribeReportDefinitionsRequest(&params)
 	resp, err := req.Send()
 	if err != nil {
-		return "", NewFindReportError(&err, reportname)
+		return models.CurInfo{}, NewFindReportError(&err, reportname)
 	}
 
-	fmt.Printf("%v\n", resp)
-	// reps := utils.GetProperty(resp, "ReportDefinitions").([]interface{})
+	log.Printf("All reports:\n%v\n", resp)
 
 	for _, repdef := range resp.ReportDefinitions {
-		fmt.Println(repdef)
 		if reportname == *repdef.ReportName {
-			return getMostRecentReportPath(cfg, repdef), nil
+			mp, rp := getMostRecentReportPath(cfg, repdef)
+
+			return models.CurInfo{
+				Def:          &repdef,
+				ManifestPath: mp,
+				ReportPath:   rp,
+			}, nil
 		}
 	}
 
 	e := errors.New("Report not found")
-	return "", NewFindReportError(&e, reportname) // FIXME: fix this error with good one
+	return models.CurInfo{}, NewFindReportError(&e, reportname) // FIXME: fix this error with good one
 }
 
-// FIXME: return errors
-func getMostRecentReportPath(cfg *aws.Config, rd cur.ReportDefinition) string {
+type ManifestPath = string
+type ReportPath = string
+
+// FIXME: Fix return types, add possible error
+func getMostRecentReportPath(cfg *aws.Config, rd cur.ReportDefinition) (ManifestPath, ReportPath) {
 	timeInterval := "20180501-20180601" // FIXME: do not hardcode this, calculate in runtime
 
-	manifestPath := // *rd.S3Bucket + "/" +
-		*rd.S3Prefix + "/" +
-			*rd.ReportName + "/" + timeInterval + "/" + *rd.ReportName + "-Manifest.json"
+	manifestPath := *rd.S3Prefix + "/" +
+		*rd.ReportName + "/" + timeInterval + "/" + *rd.ReportName + "-Manifest.json"
 
 	cfg.Region = string(rd.S3Region)
 
@@ -73,24 +81,24 @@ func getMostRecentReportPath(cfg *aws.Config, rd cur.ReportDefinition) string {
 	filename := "tmp-manifest" // FIXME: use tempfile, or do not save it in fs at all
 
 	f, err := os.Create(filename)
-	// FIXME: return errors
+
 	if err != nil {
 		log.Printf("failed to create file %q, %v", filename, err)
-		return ""
+		// FIXME: return errors
+		return "", ""
 	}
 
 	_, err = downloader.Download(f, &s3.GetObjectInput{
 		Bucket: rd.S3Bucket,
 		Key:    aws.String(manifestPath),
 	})
-	fmt.Println("s3 manifest:", manifestPath)
-	// FIXME: return errors
+
 	if err != nil {
 		log.Printf("failed to download file, %v", err)
-		return ""
+		// FIXME: return errors
+		return "", ""
 	}
 
-	// read field
 	dat, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Println("failed to read file:", err)
@@ -101,8 +109,8 @@ func getMostRecentReportPath(cfg *aws.Config, rd cur.ReportDefinition) string {
 	err = json.Unmarshal(dat, &ff)
 
 	zz := ff.(map[string]interface{})
-	yy := zz["reportKeys"].([]interface{})
+	yy := zz["reportKeys"].([]interface{}) // NOTE: I don't know why does this return an array, since report name is unique
 	ss := yy[0].(string)
 
-	return ss
+	return manifestPath, ss
 }
