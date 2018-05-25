@@ -2,13 +2,13 @@
 
 ## Cost and Usage Reports (CUR) (recomended) ##
 
-See [aws-billing.md]
+See [aws-billing.md](aws-billing.md)
 
 ## AWS Service Catalog (Scan Provision)
 
 Well... It looks like the feature for organizations only
 
-See example: [aws-scan-provision-example.go]
+See example: [aws-scan-provision-example.go](aws-scan-provision-example.go)
 
 From the landing page: (https://aws.amazon.com/servicecatalog/)
 
