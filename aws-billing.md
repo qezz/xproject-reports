@@ -383,7 +383,7 @@ and get the `assemblyId` field
 3. Get the report
 4. Unzip it
 
-See example: [aws-get-s3-example.go]
+See example: [aws-get-s3-example.go](aws-get-s3-example.go)
 
 Usage `go run aws-get-s3-example.go report-name` 
 
